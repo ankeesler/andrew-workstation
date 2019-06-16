@@ -1,0 +1,14 @@
+Accumulator register (AX). Used in arithmetic operations
+Counter register (CX). Used in shift/rotate instructions and loops.
+Data register (DX). Used in arithmetic operations and I/O operations.
+Base register (BX). Used as a pointer to data (located in segment register DS, when in segmented mode).
+Stack Pointer register (SP). Pointer to the top of the stack.
+Stack Base Pointer register (BP). Used to point to the base of the stack.
+Source Index register (SI). Used as a pointer to a source in stream operations.
+Destination Index register (DI). Used as a pointer to a destination in stream operations.
+
+There are 8 32-bit registers: eax, ebx, ecx, edx, esi, edi, ebp, esp.
+There are 8 16-bit registers: ax, bx, cx, dx, si, di, bp, sp.
+There are 8 8-bit registers: ah, al, bh, bl, ch, cl, dh, dl.
+
+https://cs.brown.edu/courses/cs033/docs/guides/x64_cheatsheet.pdf

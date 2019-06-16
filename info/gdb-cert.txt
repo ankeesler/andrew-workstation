@@ -1,0 +1,1 @@
+codesign -f -s  "gdb-cert"  /opt/local/bin/ggdb
