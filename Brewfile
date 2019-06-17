@@ -1,0 +1,3 @@
+cask "shiftit"
+
+brew "tmux"
