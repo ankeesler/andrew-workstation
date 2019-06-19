@@ -48,7 +48,7 @@
 (add-hook 'before-save-hook #'gofmt-before-save)
 
 ;; eclim???
-(add-hook 'java-mode-hook 'eclim-mode)
+;(add-hook 'java-mode-hook 'eclim-mode)
 
 ;; When I add this stuff, the go autocomplete starts working...
 ;;(require 'go-autocomplete)

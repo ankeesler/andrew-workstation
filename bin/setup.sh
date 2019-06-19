@@ -2,30 +2,16 @@
 
 set -ex
 
-function usage() {
-  echo "usage: setup.sh [-b]"
-  echo
-  echo "-b    Run `brew bundle`"
-}
-
-do_brew=0
-while getopts b o
-do
-  case "$o" in
-    b)   do_brew=1
-	 ;;
-    [?]) usage
-         exit 1
-	 ;;
-  esac
-done
-
 andrew_workstation="$HOME/workspace/andrew-workstation"
 
-if [[ "$do_brew" -eq 1 ]]; then
-  pushd "$andrew_workstation"
-    brew bundle
-  popd
+pushd "$andrew_workstation"
+  brew bundle
+popd
+
+go get golang.org/x/tools/cmd/goimports
+
+if ! bundle 1>/dev/null 2>/dev/null; then
+  sudo gem install bundler
 fi
 
 ln -fs "$andrew_workstation/dotfile/tmux.conf" "$HOME/.tmux.conf"
