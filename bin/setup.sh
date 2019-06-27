@@ -8,7 +8,7 @@ pushd "$andrew_workstation"
   brew bundle
 popd
 
-go get golang.org/x/tools/cmd/goimports
+go get golang.org/x/tools/...
 
 if ! bundle 1>/dev/null 2>/dev/null; then
   sudo gem install bundler
