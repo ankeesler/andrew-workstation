@@ -6,6 +6,7 @@ cask "java"
 
 brew "bosh-cli"
 brew "cf-cli"
+brew "clang-format"
 brew "emacs"
 brew "entr"
 brew "fzf"

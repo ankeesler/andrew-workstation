@@ -75,3 +75,7 @@
 (global-set-key (kbd "C-x C-o") 'fzf-git-files)
 
 (add-hook 'ruby-mode-hook #'rubocop-mode)
+
+(load "/usr/local/Cellar/clang-format/2019-01-18/share/clang/clang-format.el")
+(add-hook 'before-save-hook
+  (lambda() (when (eq major-mode 'c-mode) (clang-format-buffer))))
