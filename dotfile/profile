@@ -2,3 +2,7 @@ export PATH="$PATH:$HOME/workspace/andrew-workstation/bin"
 export PATH="$PATH:$HOME/go/bin"
 
 export ANBLOG_USERNAME=anblog_default_username ANBLOG_PASSWORD=anblog_default_password
+
+set_docker_password() {
+  export CF_DOCKER_PASSWORD="$(lpass show docker.com --field password)"
+}
