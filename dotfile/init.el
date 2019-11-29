@@ -14,9 +14,6 @@
 ;; turn that stupid bell off
 (setq ring-bell-function 'ignore)
 
-;; use M-l for goto-line
-(global-set-key (kbd "M-l") 'goto-line)
-
 ;; use M-r for recompile
 (global-set-key (kbd "M-r") 'recompile)
 
