@@ -11,6 +11,7 @@ RUN apt-get update \
     gdb \
     git \
     gnupg2 \
+    jq \
     man \
     manpages \
     manpages-dev \
