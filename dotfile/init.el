@@ -17,6 +17,9 @@
 ;; use M-r for recompile
 (global-set-key (kbd "M-r") 'recompile)
 
+;; use C-c C-f for open other file
+(global-set-key (kbd "C-c C-f") 'ff-find-other-file)
+
 ;; don't show the menu
 (menu-bar-mode -1)
 

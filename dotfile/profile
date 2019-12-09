@@ -8,3 +8,12 @@ export ANBLOG_USERNAME=anblog_default_username ANBLOG_PASSWORD=anblog_default_pa
 set_docker_password() {
   export CF_DOCKER_PASSWORD="$(lpass show docker.com --field password)"
 }
+
+cf_login() {
+  cf login \
+    -a api.run.pivotal.io \
+    -u akeesler@pivotal.io \
+    -p "$(lpass show pivotal.io --password)" \
+    -o akeesler-org \
+    -s development
+}
