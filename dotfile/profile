@@ -1,9 +1,12 @@
 export PATH="$PATH:$HOME/workspace/andrew-workstation/bin"
 export PATH="$PATH:$HOME/go/bin"
+export PATH="$PATH:/usr/local/texlive/2019basic/bin/x86_64-darwin"
 
 export EDITOR=emacs
 
 export ANBLOG_USERNAME=anblog_default_username ANBLOG_PASSWORD=anblog_default_password
+
+export TERM=xterm-256color
 
 set_docker_password() {
   export CF_DOCKER_PASSWORD="$(lpass show docker.com --field password)"

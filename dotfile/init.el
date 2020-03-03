@@ -59,9 +59,9 @@
 (require 'go-guru)
 
 ;; set the fill-paragraph column to 101
-(set-fill-column 101)
+(set-fill-column 80)
 
-(load-theme 'leuven) ;; agkeesle change!
+(load-theme 'tango-dark) ;; agkeesle change!
 
 (with-eval-after-load 'go-mode
   (add-hook 'go-mode-hook 'subword-mode))
