@@ -1,5 +1,6 @@
 tap "cloudfoundry/tap"
 
+cask "docker"
 cask "google-chrome"
 cask "intellij-idea-ce"
 cask "java"
