@@ -20,3 +20,11 @@ cf_login() {
     -o akeesler-org \
     -s development
 }
+
+export ANBLOG_USERNAME=anblog_default_username
+export ANBLOG_PASSWORD=anblog_default_password
+
+alias yesterday="anblog open $(date +.j.%y.%m).$(( $(date +%d) - 1))"
+alias today="anblog open $(date +.j.%y.%m.%d)"
+alias tomorrow="anblog open $(date +.j.%y.%m).$(( $(date +%d) + 1))"
+

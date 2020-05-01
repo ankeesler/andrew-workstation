@@ -36,7 +36,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (rubocop yaml-mode eclim dockerfile-mode elpy go-guru fzf go-rename go-autocomplete go-mode))))
+    (clang-format clang-format+ rubocop yaml-mode dockerfile-mode elpy go-guru fzf go-rename go-autocomplete go-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -76,9 +76,9 @@
 
 (add-hook 'ruby-mode-hook #'rubocop-mode)
 
-(load "/usr/local/Cellar/clang-format/2019-01-18/share/clang/clang-format.el")
-(add-hook 'before-save-hook
-          (lambda() (when (or
-                           (eq major-mode 'c-mode)
-                           (eq major-mode 'c++-mode))
-                      (clang-format-buffer))))
+; does clang-format+ do this for us?
+;;(add-hook 'before-save-hook
+;;          (lambda() (when (or
+;;                           (eq major-mode 'c-mode)
+;;                           (eq major-mode 'c++-mode))
+;;                      (clang-format-buffer))))

@@ -1,0 +1,6 @@
+source ~/.profile
+export WORDCHARS=${WORDCHARS//[.\/\-]}
+
+reload() {
+  source ~/.zprofile
+}

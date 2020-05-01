@@ -16,5 +16,8 @@ fi
 
 ln -fs "$andrew_workstation/dotfile/tmux.conf" "$HOME/.tmux.conf"
 ln -fs "$andrew_workstation/dotfile/profile" "$HOME/.profile"
+ln -fs "$andrew_workstation/dotfile/zprofile" "$HOME/.zprofile"
 mkdir -p "$HOME/.emacs.d"
 ln -fs "$andrew_workstation/dotfile/init.el" "$HOME/.emacs.d/init.el"
+
+curl anblog.cfapps.io/download | sudo sh
