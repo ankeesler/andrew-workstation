@@ -1,6 +1,4 @@
-export PATH="$PATH:$HOME/workspace/andrew-workstation/bin"
-export PATH="$PATH:$HOME/go/bin"
-export PATH="$PATH:/usr/local/texlive/2019basic/bin/x86_64-darwin"
+export PATH="$PATH:$HOME/workspace/src/github.com/ankeesler/andrew-workstation/bin"
 
 export EDITOR=emacs
 
@@ -28,3 +26,5 @@ alias yesterday="anblog open $(date +.j.%y.%m).$(( $(date +%d) - 1))"
 alias today="anblog open $(date +.j.%y.%m.%d)"
 alias tomorrow="anblog open $(date +.j.%y.%m).$(( $(date +%d) + 1))"
 
+export GOPATH=$HOME/workspace
+export PATH="$PATH:$GOPATH/bin"

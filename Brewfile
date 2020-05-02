@@ -2,6 +2,7 @@ tap "cloudfoundry/tap"
 
 cask "docker"
 cask "google-chrome"
+cask "google-cloud-sdk"
 cask "intellij-idea-ce"
 cask "java"
 cask "shiftit"
