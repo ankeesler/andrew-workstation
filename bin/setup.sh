@@ -8,8 +8,8 @@ pushd "$andrew_workstation"
   brew bundle
 popd
 
-go get golang.org/x/tools/...
-go get github.com/rogpeppe/godef
+go get -u golang.org/x/tools/...
+go get -u github.com/rogpeppe/godef
 
 if ! bundle 1>/dev/null 2>/dev/null; then
   sudo gem install bundler

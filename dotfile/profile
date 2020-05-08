@@ -22,9 +22,13 @@ cf_login() {
 export ANBLOG_USERNAME=anblog_default_username
 export ANBLOG_PASSWORD=anblog_default_password
 
-alias yesterday="anblog open $(date +.j.%y.%m).$(( $(date +%d) - 1))"
+alias yesterday="anblog open $(date -v -1d +.j.%y.%m.%d)"
 alias today="anblog open $(date +.j.%y.%m.%d)"
-alias tomorrow="anblog open $(date +.j.%y.%m).$(( $(date +%d) + 1))"
+alias tomorrow="anblog open $(date -v +1d +.j.%y.%m.%d)"
 
 export GOPATH=$HOME/workspace
 export PATH="$PATH:$GOPATH/bin"
+
+reload() {
+  source ~/.zprofile
+}
