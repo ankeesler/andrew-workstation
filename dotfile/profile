@@ -1,3 +1,4 @@
+export PS1='\u@\h:\W\$ '
 export PATH="$PATH:$HOME/workspace/src/github.com/ankeesler/andrew-workstation/bin"
 
 export EDITOR=emacs
