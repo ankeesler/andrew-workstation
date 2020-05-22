@@ -23,4 +23,5 @@ ln -fs "$andrew_workstation/dotfile/init.el" "$HOME/.emacs.d/init.el"
 
 curl anblog.cfapps.io/download | sudo sh
 
-chsh -s /bin/bash
+sudo sh -c 'echo /usr/local/bin/bash >> /etc/shells'
+chsh -s /usr/local/bin/bash

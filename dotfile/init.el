@@ -36,7 +36,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (clang-format clang-format+ rubocop yaml-mode dockerfile-mode elpy go-guru fzf go-rename go-autocomplete go-mode))))
+    (flymake-go flymake lsp-ui use-package company-lsp lsp-mode clang-format clang-format+ rubocop yaml-mode dockerfile-mode elpy go-guru fzf go-rename go-autocomplete go-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -44,11 +44,59 @@
  ;; If there is more than one, they won't work right.
  )
 
-;; call go fmt before save
-(add-hook 'before-save-hook #'gofmt-before-save)
+(setq make-backup-files nil) ; stop creating backup~ files
+(setq auto-save-default nil) ; stop creating #autosave# files
 
-;; eclim???
-;(add-hook 'java-mode-hook 'eclim-mode)
+; tie fzf-git-files to keyboard shortcut
+(global-set-key (kbd "C-x C-o") 'fzf-git-files)
+
+(load-theme 'tango-dark) ;; agkeesle change!
+
+(add-to-list 'auto-mode-alist '("\\.j\\." . yaml-mode))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; go
+
+(with-eval-after-load 'go-mode
+  (add-hook 'go-mode-hook 'subword-mode))
+
+(use-package lsp-mode
+  :ensure t
+  :config (setq lsp-file-watch-threshold 100000) ; k/k is ~55,000 files
+  :commands (lsp lsp-deferred)
+  :init
+  :hook (go-mode . lsp-deferred))
+
+;; Set up before-save hooks to format buffer and add/delete imports.
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+
+;; Optional - provides fancier overlays.
+;(use-package lsp-ui
+;  :ensure t
+;  :commands lsp-ui-mode)
+
+(use-package company
+  :ensure t
+  :config
+  ;; Optionally enable completion-as-you-type behavior.
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 1))
+
+(use-package company-lsp
+  :ensure t
+  :commands company-lsp)
+
+;; Optional - provides snippet support.
+(use-package yasnippet
+  :ensure t
+  :commands yas-minor-mode
+  :hook (go-mode . yas-minor-mode))
+
+;; call go fmt before save
+;(add-hook 'before-save-hook #'gofmt-before-save)
 
 ;; When I add this stuff, the go autocomplete starts working...
 ;;(require 'go-autocomplete)
@@ -56,25 +104,17 @@
 ;;(ac-config-default) i wonder if this is what is bringing up the list automatically...
 
 ;; go guru package
-(require 'go-guru)
+;(require 'go-guru)
 
-;; set the fill-paragraph column to 101
-(set-fill-column 80)
+;(setq gofmt-command "goimports")
 
-(load-theme 'tango-dark) ;; agkeesle change!
-
-(with-eval-after-load 'go-mode
-  (add-hook 'go-mode-hook 'subword-mode))
-
-(setq gofmt-command "goimports")
-
-(setq make-backup-files nil) ; stop creating backup~ files
-(setq auto-save-default nil) ; stop creating #autosave# files
-
-; tie fzf-git-files to keyboard shortcut
-(global-set-key (kbd "C-x C-o") 'fzf-git-files)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; ruby
 
 (add-hook 'ruby-mode-hook #'rubocop-mode)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; c/c++
 
 ; does clang-format+ do this for us?
 ;;(add-hook 'before-save-hook
