@@ -20,6 +20,7 @@ ln -fs "$andrew_workstation/dotfile/profile" "$HOME/.profile"
 ln -fs "$andrew_workstation/dotfile/zprofile" "$HOME/.zprofile"
 mkdir -p "$HOME/.emacs.d"
 ln -fs "$andrew_workstation/dotfile/init.el" "$HOME/.emacs.d/init.el"
+ln -fs "$andrew_workstation/dotfile/gitconfig" "$HOME/.gitconfig"
 
 curl anblog.cfapps.io/download | sudo sh
 
