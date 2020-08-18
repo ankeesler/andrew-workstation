@@ -26,3 +26,5 @@ curl anblog.cfapps.io/download | sudo sh
 
 sudo sh -c 'echo /usr/local/bin/bash >> /etc/shells'
 chsh -s /usr/local/bin/bash
+
+echo "done."

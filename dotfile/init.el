@@ -27,7 +27,7 @@
 (require 'package)
 (add-to-list
  'package-archives
- '("melpa" . "http://melpa.milkbox.net/packages/")
+ '("melpa" . "https://melpa.org/packages/")
  t)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -36,7 +36,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (flymake-go flymake lsp-ui use-package company-lsp lsp-mode clang-format clang-format+ rubocop yaml-mode dockerfile-mode elpy go-guru fzf go-rename go-autocomplete go-mode))))
+    (flycheck flymake-shell flymake-shellcheck flymake-go flymake lsp-ui use-package company-lsp lsp-mode clang-format clang-format+ rubocop yaml-mode dockerfile-mode elpy go-guru fzf go-rename go-autocomplete go-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -54,59 +54,54 @@
 
 (add-to-list 'auto-mode-alist '("\\.j\\." . yaml-mode))
 
+; add line numbers
+(when (version<= "26.0.50" emacs-version )
+  (global-display-line-numbers-mode))
+
+; flycheck?
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; go
 
 (with-eval-after-load 'go-mode
   (add-hook 'go-mode-hook 'subword-mode))
 
-(use-package lsp-mode
-  :ensure t
-  :config (setq lsp-file-watch-threshold 100000) ; k/k is ~55,000 files
-  :commands (lsp lsp-deferred)
-  :init
-  :hook (go-mode . lsp-deferred))
+;(use-package lsp-mode
+;  :ensure t
+;  :config (setq lsp-file-watch-threshold 100000) ; k/k is ~55,000 files
+;  :commands (lsp lsp-deferred)
+;  :init
+;  :hook (go-mode . lsp-deferred))
 
 ;; Set up before-save hooks to format buffer and add/delete imports.
-(defun lsp-go-install-save-hooks ()
-  (add-hook 'before-save-hook #'lsp-format-buffer t t)
-  (add-hook 'before-save-hook #'lsp-organize-imports t t))
-(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+;(defun lsp-go-install-save-hooks ()
+;  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+;  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+;(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
 ;; Optional - provides fancier overlays.
 ;(use-package lsp-ui
 ;  :ensure t
 ;  :commands lsp-ui-mode)
 
-(use-package company
-  :ensure t
-  :config
-  ;; Optionally enable completion-as-you-type behavior.
-  (setq company-idle-delay 0)
-  (setq company-minimum-prefix-length 1))
+;(use-package company
+;  :ensure t
+;  :config
+;  ;; Optionally enable completion-as-you-type behavior.
+;  (setq company-idle-delay 0)
+;  (setq company-minimum-prefix-length 1))
 
-(use-package company-lsp
-  :ensure t
-  :commands company-lsp)
+;(use-package company-lsp
+;  :ensure t
+;  :commands company-lsp)
 
-;; Optional - provides snippet support.
-(use-package yasnippet
-  :ensure t
-  :commands yas-minor-mode
-  :hook (go-mode . yas-minor-mode))
+; call gofmt + goimports before save
+(add-hook 'before-save-hook #'gofmt-before-save)
+(setq gofmt-command "goimports")
 
-;; call go fmt before save
-;(add-hook 'before-save-hook #'gofmt-before-save)
-
-;; When I add this stuff, the go autocomplete starts working...
-;;(require 'go-autocomplete)
-;;(require 'auto-complete-config) i wonder if we are getting multiple autocomplete lists...
-;;(ac-config-default) i wonder if this is what is bringing up the list automatically...
-
-;; go guru package
-;(require 'go-guru)
-
-;(setq gofmt-command "goimports")
+; go guru package
+(require 'go-guru)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; ruby
@@ -122,3 +117,23 @@
 ;;                           (eq major-mode 'c-mode)
 ;;                           (eq major-mode 'c++-mode))
 ;;                      (clang-format-buffer))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; sh
+
+;(require 'flymake-shellcheck)
+;(add-hook 'sh-mode-hook 'flymake-shellcheck-load)
+;(require 'flymake-shell)
+;(add-hook 'sh-set-shell-hook 'flymake-shell-load)
+
+(defun setup-sh-mode ()
+  "My own personal preferences for `sh-mode'.
+
+This is a custom function that sets up the parameters I usually
+prefer for `sh-mode'.  It is automatically added to
+`sh-mode-hook', but is can also be called interactively."
+  (interactive)
+  (setq sh-basic-offset 2
+        sh-indentation 2))
+(add-hook 'sh-mode-hook 'setup-sh-mode)
+; '(smie-indent-basic 2) what?
