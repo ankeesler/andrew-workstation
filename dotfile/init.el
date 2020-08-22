@@ -18,7 +18,7 @@
 (global-set-key (kbd "M-r") 'recompile)
 
 ;; use C-c C-f for open other file
-(global-set-key (kbd "C-c C-f") 'ff-find-other-file)
+(global-set-key (kbd "C-c o") 'ff-find-other-file)
 
 ;; don't show the menu
 (menu-bar-mode -1)
@@ -36,7 +36,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (flycheck flymake-shell flymake-shellcheck flymake-go flymake lsp-ui use-package company-lsp lsp-mode clang-format clang-format+ rubocop yaml-mode dockerfile-mode elpy go-guru fzf go-rename go-autocomplete go-mode))))
+    (gotest flycheck flymake-shell flymake-shellcheck flymake-go flymake lsp-ui use-package company-lsp lsp-mode clang-format clang-format+ rubocop yaml-mode dockerfile-mode elpy go-guru fzf go-rename go-autocomplete go-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
