@@ -112,11 +112,11 @@
 ; c/c++
 
 ; does clang-format+ do this for us?
-;;(add-hook 'before-save-hook
-;;          (lambda() (when (or
-;;                           (eq major-mode 'c-mode)
-;;                           (eq major-mode 'c++-mode))
-;;                      (clang-format-buffer))))
+(add-hook 'before-save-hook
+          (lambda() (when (or
+                           (eq major-mode 'c-mode)
+                           (eq major-mode 'c++-mode))
+                      (clang-format-buffer))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; sh
