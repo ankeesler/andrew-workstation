@@ -36,7 +36,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (gotest flycheck flymake-shell flymake-shellcheck flymake-go flymake lsp-ui use-package company-lsp lsp-mode clang-format clang-format+ rubocop yaml-mode dockerfile-mode elpy go-guru fzf go-rename go-autocomplete go-mode))))
+    (fill-column-indicator gotest flycheck flymake-shell flymake-shellcheck flymake-go flymake lsp-ui use-package company-lsp lsp-mode clang-format clang-format+ rubocop yaml-mode dockerfile-mode elpy go-guru fzf go-rename go-autocomplete go-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -67,41 +67,33 @@
 (with-eval-after-load 'go-mode
   (add-hook 'go-mode-hook 'subword-mode))
 
-;(use-package lsp-mode
-;  :ensure t
-;  :config (setq lsp-file-watch-threshold 100000) ; k/k is ~55,000 files
-;  :commands (lsp lsp-deferred)
-;  :init
-;  :hook (go-mode . lsp-deferred))
+(use-package lsp-mode
+  :ensure t
+  :config (setq lsp-file-watch-threshold 100000) ; k/k is ~55,000 files
+  :commands (lsp lsp-deferred)
+  :init
+  :hook (go-mode . lsp-deferred))
 
 ;; Set up before-save hooks to format buffer and add/delete imports.
-;(defun lsp-go-install-save-hooks ()
-;  (add-hook 'before-save-hook #'lsp-format-buffer t t)
-;  (add-hook 'before-save-hook #'lsp-organize-imports t t))
-;(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
-
-;; Optional - provides fancier overlays.
-;(use-package lsp-ui
-;  :ensure t
-;  :commands lsp-ui-mode)
-
-;(use-package company
-;  :ensure t
-;  :config
-;  ;; Optionally enable completion-as-you-type behavior.
-;  (setq company-idle-delay 0)
-;  (setq company-minimum-prefix-length 1))
-
-;(use-package company-lsp
-;  :ensure t
-;  :commands company-lsp)
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
 ; call gofmt + goimports before save
-(add-hook 'before-save-hook #'gofmt-before-save)
-(setq gofmt-command "goimports")
+;(add-hook 'before-save-hook #'gofmt-before-save)
+;(setq gofmt-command "goimports")
 
 ; go guru package
-(require 'go-guru)
+;(require 'go-guru)
+
+; testing shortcuts
+(global-set-key (kbd "C-c t") 'go-test-current-test)
+
+; enable visible column
+; set fill column at 100 characters
+(add-hook 'go-mode-hook
+          (lambda() (fci-mode) (setq fci-rule-column 100)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; ruby
@@ -137,3 +129,15 @@ prefer for `sh-mode'.  It is automatically added to
         sh-indentation 2))
 (add-hook 'sh-mode-hook 'setup-sh-mode)
 ; '(smie-indent-basic 2) what?
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; markdown
+
+(add-hook 'markdown-mode-hook 'flyspell-mode)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(provide 'init)
+;;; init.el ends here
