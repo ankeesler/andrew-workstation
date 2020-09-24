@@ -35,8 +35,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   (quote
-    (fill-column-indicator gotest flycheck flymake-shell flymake-shellcheck flymake-go flymake lsp-ui use-package company-lsp lsp-mode clang-format clang-format+ rubocop yaml-mode dockerfile-mode elpy go-guru fzf go-rename go-autocomplete go-mode))))
+   '(fill-column-indicator gotest flycheck flymake-shell flymake-shellcheck flymake-go flymake lsp-ui use-package company-lsp lsp-mode clang-format clang-format+ rubocop yaml-mode dockerfile-mode elpy go-guru fzf go-rename go-autocomplete go-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -52,14 +51,15 @@
 
 (load-theme 'tango-dark) ;; agkeesle change!
 
-(add-to-list 'auto-mode-alist '("\\.j\\." . yaml-mode))
-
 ; add line numbers
 (when (version<= "26.0.50" emacs-version )
   (global-display-line-numbers-mode))
 
 ; flycheck?
 (add-hook 'after-init-hook #'global-flycheck-mode)
+
+; global delete-selection-mode
+(add-hook 'after-init-hook 'delete-selection-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; go
@@ -80,6 +80,9 @@
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
 (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
+; hit C-c SPC to suggest completions
+(global-set-key (kbd "C-c SPC") 'company-complete)
+
 ; call gofmt + goimports before save
 ;(add-hook 'before-save-hook #'gofmt-before-save)
 ;(setq gofmt-command "goimports")
@@ -89,11 +92,19 @@
 
 ; testing shortcuts
 (global-set-key (kbd "C-c t") 'go-test-current-test)
+(global-set-key (kbd "C-c T") 'go-test-current-project)
 
 ; enable visible column
 ; set fill column at 100 characters
 (add-hook 'go-mode-hook
           (lambda() (fci-mode) (setq fci-rule-column 100)))
+
+; enable yas-minor-mode for snippets
+(add-hook 'go-mode-hook 'yas-minor-mode)
+
+; enable auto filling at 100 colums
+(add-hook 'go-mode-hook
+          (lambda() (auto-fill-mode) (setq fill-column 100)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; ruby
