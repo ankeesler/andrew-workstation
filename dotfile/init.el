@@ -105,7 +105,7 @@
 
 ; enable auto filling at 100 colums
 (add-hook 'go-mode-hook
-          (lambda() (auto-fill-mode) (setq fill-column 100)))
+          (lambda() (setq fill-column 100)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; ruby
