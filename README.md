@@ -2,6 +2,13 @@
 
 This is a repo for my personal workstation setup.
 
+## Core steps
+
+1. Install XCode stuff
+1. Clone this repo to `~/workspace/src/github.com/ankeesler/andrew-workstation`
+1. Install [homebrew](https://brew.sh)
+1. Run [`./bin/setup.sh`](bin/setup.sh)
+
 ## Additional steps
 
 1. [Create new GitHub access token](https://github.com/settings/tokens)

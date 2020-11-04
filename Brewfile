@@ -1,23 +1,23 @@
-tap "cloudfoundry/tap"
+#tap "cloudfoundry/tap" # i don't think i really need cf anymore, rip
 
 cask "basictex"
 cask "docker"
 cask "google-chrome"
 cask "google-cloud-sdk"
 cask "intellij-idea-ce"
-cask "java"
+#cask "java" # apparently, this does not exist anymore...
 cask "shiftit"
 cask "slack"
 cask "wireshark"
 
 brew "awscli"
 brew "bash" # for kubernetes, default macos catalina version doesn't work...
-brew "bbl"
-brew "bosh-cli"
-brew "cf-cli"
+#brew "bbl" # i don't think i really need cf anymore, rip
+#brew "bosh-cli" # i don't think i really need cf anymore, rip
+#brew "cf-cli" # i don't think i really need cf anymore, rip
 brew "clang-format"
 brew "coreutils"
-brew "credhub-cli"
+#brew "credhub-cli" # i don't think i really need cf anymore, rip
 brew "cscope"
 brew "emacs"
 brew "entr"
