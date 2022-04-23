@@ -10,6 +10,7 @@ popd
 
 GOPATH="$HOME/workspace" go get -u golang.org/x/tools/...
 GOPATH="$HOME/workspace" go get -u github.com/rogpeppe/godef
+go install golang.org/x/tools/gopls@latest
 
 if ! bundle 1>/dev/null 2>/dev/null; then
   sudo gem install bundler

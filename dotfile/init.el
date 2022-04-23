@@ -36,13 +36,14 @@
  ;; If there is more than one, they won't work right.
  '(fill-column 80)
  '(package-selected-packages
-   '(fill-column-indicator gotest flycheck flymake-shell flymake-shellcheck flymake-go flymake lsp-ui use-package company-lsp lsp-mode clang-format clang-format+ rubocop yaml-mode dockerfile-mode elpy go-guru fzf go-rename go-autocomplete go-mode)))
+   '(fill-column-indicator gotest flycheck flymake-shell flymake-shellcheck flymake-go flymake lsp-ui use-package company-lsp lsp-mode clang-format clang-format+ rubocop yaml-mode dockerfile-mode elpy go-guru fzf go-rename go-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+; go-autocomplete i removed from above...
 
 (setq make-backup-files nil) ; stop creating backup~ files
 (setq auto-save-default nil) ; stop creating #autosave# files
@@ -78,7 +79,8 @@
 ;; Set up before-save hooks to format buffer and add/delete imports.
 (defun lsp-go-install-save-hooks ()
   (add-hook 'before-save-hook #'lsp-format-buffer t t)
-  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+  (add-hook 'before-save-hook #'lsp-organize-imports t t)
+  (remove-hook 'before-save-hook #'community-mode t))
 (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
 ; hit C-c SPC to suggest completions
@@ -140,6 +142,21 @@ prefer for `sh-mode'.  It is automatically added to
   (setq sh-basic-offset 2
         sh-indentation 2))
 (add-hook 'sh-mode-hook 'setup-sh-mode)
+; '(smie-indent-basic 2) what?
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; js
+
+(defun setup-js-mode ()
+  "My own personal preferences for `js-mode'.
+
+This is a custom function that sets up the parameters I usually
+prefer for `js-mode'.  It is automatically added to
+`js-mode-hook', but is can also be called interactively."
+  (interactive)
+  (setq sh-basic-offset 2
+        sh-indentation 2))
+(add-hook 'js-mode-hook 'setup-js-mode)
 ; '(smie-indent-basic 2) what?
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
