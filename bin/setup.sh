@@ -5,7 +5,7 @@ set -ex
 andrew_workstation="$(cd $(dirname "${BASH_SOURCE[0]}")/.. && pwd)"
 
 pushd "$andrew_workstation"
-  brew bundle
+  brew bundle install --cleanup
 popd
 
 GOPATH="$HOME/workspace" go get -u golang.org/x/tools/...
@@ -22,8 +22,7 @@ ln -fs "$andrew_workstation/dotfile/zprofile" "$HOME/.zprofile"
 mkdir -p "$HOME/.emacs.d"
 ln -fs "$andrew_workstation/dotfile/init.el" "$HOME/.emacs.d/init.el"
 ln -fs "$andrew_workstation/dotfile/gitconfig" "$HOME/.gitconfig"
-
-#curl anblog.cfapps.io/download | sudo sh # does not exist anymore :'(
+ln -fs "$andrew_workstation/dotfile/gitignore" "$HOME/.gitignore"
 
 sudo sh -c 'echo /usr/local/bin/bash >> /etc/shells'
 chsh -s /usr/local/bin/bash

@@ -1,0 +1,5 @@
+.vscode
+
+# for t-f
+go.work
+go.work.sum

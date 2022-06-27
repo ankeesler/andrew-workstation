@@ -1,5 +1,30 @@
 [user]
-	email = ankeesler1@gmail.com
+	email = akeesler@vmware.com
 	name = Andrew Keesler
+	signingKey = 27CE0444346F9413
 [rerere]
 	enabled = true
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[url "git@gitlab.eng.vmware.com:"]
+	insteadOf = https://gitlab.eng.vmware.com/
+[alias]
+	ci = duet-commit
+	mi = merge-commit
+	ri = revert-commit
+[commit]
+	gpgsign = true
+[pull]
+	rebase = false
+[duet "env"]
+	git-author-initials = sa
+	git-author-name = Sarah Abbey
+	git-author-email = sabbey@vmware.com
+	mtime = 1635432841
+	git-committer-initials = ak
+	git-committer-name = Andrew Keesler
+	git-committer-email = akeesler@vmware.com
+[gpg]
+	program = gpg
+[core]
+	excludesFile = ~/.gitignore
